@@ -1,7 +1,6 @@
 ﻿var settings = {};
 
 /* configuration */
-$.level = 1;
 $.strict = false;
 
 /* extendables settings */
