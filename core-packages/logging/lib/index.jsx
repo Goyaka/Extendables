@@ -44,12 +44,10 @@ var Log = function (name, log_level) {
 	
 	
 	this.writeln = function (severity, message) {
-		var log = self.file;		
-		var logmessage = new LogMessage(severity, message)
-		log.open("e");
-		log.seek(log.length);	
-		log.writeln(logmessage);
-		log.close();		
+    var logmessage = new LogMessage(severity, message);
+    this.logger.open('a');
+    this.logger.writeln(logmessage);
+    this.logger.close();
 	}
 
 	// basic logger
