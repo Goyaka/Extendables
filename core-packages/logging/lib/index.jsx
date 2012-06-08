@@ -42,14 +42,6 @@ var Log = function (name, log_level) {
 	if (log_level && log_level.is(String)) log_level = SEVERITY.indexOf(log_level);
 	this.log_level = log_level || settings.LOGGING_LOG_LEVEL || 4;
 	
-	this.truncate = function (forced) {
-		// truncate the logfile if it gets bigger than half a megabyte
-		self.file.open("e");
-		if (forced || self.file.length > 1024*512) {
-			self.file.length = 0;
-		}
-		self.file.close();
-	}
 	
 	this.writeln = function (severity, message) {
 		var log = self.file;		
@@ -119,9 +111,10 @@ var Log = function (name, log_level) {
 	}
 
 	// init
-	var logfolder = settings.LOGGING_FOLDER || new Folder("log").at(Folder.extendables);
-	this.file = new File(this.name).at(logfolder);
-	this.truncate();
+  this.logger = new File(this.name);
+  if(this.logger.lineFeed == "macintosh") {
+    this.logger.lineFeed = "unix";
+  }
 }
 
 exports.Log = Log;
