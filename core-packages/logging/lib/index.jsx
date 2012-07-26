@@ -54,8 +54,7 @@ var Log = function (name, log_level) {
   this.log = function () {
     var arguments = arguments.to('array');
     var severity  = arguments.shift();
-    var template = arguments.shift();
-    var message = template.format.apply(template, arguments);
+    var message = arguments.shift();
     // only log what's equal to or below the configured logging treshold
     if (severity <= self.log_level) {
       self.writeln(severity, message);
